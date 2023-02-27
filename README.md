@@ -32,6 +32,8 @@
 - [Inquirer Package](https://www.npmjs.com/package/inquirer/v/8.2.4)
 - [console.table Package](https://www.npmjs.com/package/console.table)
 
+- ASCII Art: [patorjk](https://patorjk.com/software/taag/) (Using Ivrit Font)
+
 ### Applications Used :gear:
 - VS Code
 - Screencastify
