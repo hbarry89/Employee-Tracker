@@ -3,6 +3,7 @@
 ## Description
 
 - The purpose of this repository is for a business owner to be able to view and manage the departments, roles, and employees in their company so that they can organize and plan their business.
+- This is done by having a content management system (CMS) by building a command-line application from scratch to manage a company's employee database, using Node.js, Inquirer, and MySQL.
 
 ## Usage
 
@@ -20,7 +21,8 @@
 
 ### Resources :books:
 - Bootcamp Materials
-- Challenge demonstration by TA in class
+- Demonstration by instructor in office hours
+- Demonstration by TA in class
 - Tutor
 - AskBCS Learning Assistant
 - [MySQL Tutorial for Beginners](https://www.youtube.com/watch?v=7S_tz1z_5bA)
