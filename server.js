@@ -43,6 +43,7 @@ const questions = [
         message: 'What would you like to do?',
         name: 'do',
         choices: ['View All Employees', 'Add Employees', 'Update Employee Role', 'View All Roles', 'Add Roles', 'View All Departments', 'Add Departments', 'Quit', 'View All Employees']
+        // in the choices array, double check options and spelling, add next question at the end
     },
 ];
 
@@ -56,3 +57,34 @@ function init() {
 }
 
 init();
+
+//-------------------------- From Instructor
+const initialQuestion = [
+    {
+       type: 'list',
+     message: 'What would you like to do?',
+     choices: ['View All Employees', "Add Employee", "Update Employee Role", "View All Roles", "Add Role", "View All Departments", "Add Department", "Quit", "want to try again"],
+     name: 'option' 
+    }
+]
+
+init();
+function init(){
+    initialQ();
+}
+
+function initialQ () {
+inquirer.prompt(initialQuestion)
+.then(ans=>{
+    console.log(ans);
+    // ans.option === "want to try again" ? initialQ() : process.exit();
+    switch (ans.option) {
+        case "want to try again":
+            initialQ()
+            break;
+    
+        default:
+            break;
+    }
+})
+}
