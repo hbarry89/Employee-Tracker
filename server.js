@@ -196,8 +196,9 @@ function roleQ() {
       mainQ();
     });
   // Need to actually add to the database
-  db.query(`INSERT INTO role (name, salary, department_id) VALUES ("Role 1", 50000, 1),`, function (err, results) {
-    //console.log(results);
+  db.query(`INSERT INTO role (name, salary, department_id) VALUES ("${response.roleName}", ${response.roleSalary}, ${response.roleDepartment})`, function (err, results) {
+    if (err) throw err;
+    console.log(results);
   });
 }
 
@@ -210,8 +211,9 @@ function employeeQ() {
       mainQ();
     });
   // Need to actually add to the database
-  db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Elliot", "Smith", 1, 3),`, function (err, results) {
-    //console.log(results);
+  db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("${response.empfName}", "${response.emplName}", ${response.empRole}, ${response.empManager})`, function (err, results) {
+    if (err) throw err;
+    console.log(results);
   });
 }
 

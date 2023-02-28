@@ -1,17 +1,12 @@
--- Create new databases --
+-- Create Databases --
 CREATE DATABASE employees_db;
 
 -- Use employees_db --
 USE employees_db;
 
--- See database in use --
-SELECT DATABASE();
-
--- Creates the table "department" within employees_db --
+-- Create Tables --
 CREATE TABLE department (
-  -- Creates a numeric column called "id" which will automatically increment its default value as we create new rows --
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  -- Makes a string column called "name" which cannot contain null --
   name VARCHAR(30) NOT NULL
 );
 
