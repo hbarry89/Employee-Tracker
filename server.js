@@ -142,7 +142,6 @@ function mainQ() {
         break;
       case "Quit":                   // ------QUIT------
         process.exit(console.log ('Thank you for using Employee Manager!'));
-        break; // Is it an issue that break is grayed out?
       default:
         break;
     }
@@ -160,6 +159,7 @@ function viewDep() {
 // View Roles
 function viewRole() {
   db.query('SELECT * FROM role', function (err, results) {
+    // select course_names.name, department.name from course_names JOIN department ON course_names.department = department.id;
     console.table(results);
     mainQ();
   });
@@ -229,3 +229,5 @@ function updateRoleQ() {
       mainQ();
     });
 }
+
+// 222 update role question, after user sselecting the one of the employee, you haev to display the list of role, then if user select one of the role then u can update using the id of employee and ir of the role
