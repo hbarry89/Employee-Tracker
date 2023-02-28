@@ -18,9 +18,9 @@ const db = mysql.createConnection(
     user: 'root',
     // MySQL password
     password: 'rootroot',
-    database: '_db' // Database name here
+    database: 'employees_db' // Database name here
   },
-  console.log(`Connected to the _db database.`) // Database name here
+  console.log(`Connected to the employees_db database.`) // Database name here
 );
 
 // Query database
@@ -140,35 +140,35 @@ function mainQ() {
   inquirer
     .prompt(mainQuestion)
     .then((response) => {
-        switch (response.do) {
-        case "View All Departments":   // ------VIEW------
-          viewDep();
-          break;
-        case "View All Roles":         // ------VIEW------
-          viewRole();
-          break;
-        case "View All Employees":     // ------VIEW------
-          viewEmp();
-          break;
-        case "Add Department":         // ------ADD------
-          departmentQ();
-          break;
-        case "Add Role":               // ------ADD------
-          roleQ();
-          break;
-        case "Add Employee":           //  ------ADD------
-          employeeQ();
-          break;
-        case "Update Employee Role":   // ------UPDATE------
-          updateRoleQ();
-          break;
-        case "Quit":                   // ------QUIT------
-          process.exit(console.log ('Thank you for using Employee Manager!'));
-          break; // Is it an issue that break is grayed out?
-        default:
-          break;
-      }
-    });
+      switch (response.do) {
+      case "View All Departments":   // ------VIEW------
+        viewDep();
+        break;
+      case "View All Roles":         // ------VIEW------
+        viewRole();
+        break;
+      case "View All Employees":     // ------VIEW------
+        viewEmp();
+        break;
+      case "Add Department":         // ------ADD------
+        departmentQ();
+        break;
+      case "Add Role":               // ------ADD------
+        roleQ();
+        break;
+      case "Add Employee":           //  ------ADD------
+        employeeQ();
+        break;
+      case "Update Employee Role":   // ------UPDATE------
+        updateRoleQ();
+        break;
+      case "Quit":                   // ------QUIT------
+        process.exit(console.log ('Thank you for using Employee Manager!'));
+        break; // Is it an issue that break is grayed out?
+      default:
+        break;
+    }
+  });
 }
 
 // View Departments
