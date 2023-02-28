@@ -24,18 +24,9 @@ const db = mysql.createConnection(
 );
 
 // Query database
-db.query('SELECT * FROM students', function (err, results) {
-  //console.log(results); (shows undefined right away in terminal upon testing)
-});
-
-// Default response for any other request (Not Found)
-app.use((req, res) => {
-  res.status(404).end();
-});
-
-app.listen(PORT, () => {
-  //console.log(`Server running on port ${PORT}`); (shows right away in terminal upon testing)
-});
+// db.query('SELECT * FROM table', function (err, results) {
+//   console.log(results); (shows undefined right away in terminal upon testing)
+// });
 
 // Main Page Quesetions | mainQ()
 const mainQuestion = [
@@ -204,6 +195,9 @@ function departmentQ() {
       mainQ();
     });
   // Need to actually add to the database
+  db.query(`INSERT INTO department (name) VALUES ("${response.addDepartment}")`, function (err, results) {
+    //console.log(results);
+  });
 }
 
 // Add Role
@@ -215,6 +209,9 @@ function roleQ() {
       mainQ();
     });
   // Need to actually add to the database
+  db.query(`INSERT INTO role (name, salary, department_id) VALUES ("Role 1", 50000, 1),`, function (err, results) {
+    //console.log(results);
+  });
 }
 
 // Add Employee
@@ -226,6 +223,9 @@ function employeeQ() {
       mainQ();
     });
   // Need to actually add to the database
+  db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Elliot", "Smith", 1, 3),`, function (err, results) {
+    //console.log(results);
+  });
 }
 
 // Update Employee Role
@@ -239,3 +239,12 @@ function updateRoleQ() {
     });
   // Need to actually update the database
 }
+
+// Default response for any other request (Not Found)
+app.use((req, res) => {
+  res.status(404).end();
+});
+
+app.listen(PORT, () => {
+  //console.log(`Server running on port ${PORT}`); (shows right away in terminal upon testing)
+});
