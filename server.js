@@ -147,8 +147,8 @@ function mainQ() {
   inquirer
   .prompt(mainQuestion)
   .then((answers) => {
-    console.log(answers);
-      switch (ans.option) {
+    //console.log(answers);
+      switch (answers.choices) {
       case "View All Departments":    // ------VIEW------
         viewDep();
         break;
