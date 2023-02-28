@@ -121,29 +121,22 @@ const updateRoleQuestion = [  // updateRoleQ()
 init();
 
 function init() {
+  console.log(`
+  _____                 _                       
+ | ____|_ __ ___  _ __ | | ___  _   _  ___  ___ 
+ |  _| | '_ \` _ \\| '_ \\| |/ _ \\| | | |/ _ \\/ _ \\
+ | |___| | | | | | |_) | | (_) | |_| |  __/  __/
+ |_____|_| |_| |_| .__/|_|\\___/ \\__, |\\___|\\___|
+  __  __         |_|            |___/           
+ |  \\/  | __ _ _ __   __ _  __ _  ___ _ __      
+ | |\\/| |/ _\` | '_ \\ / _\` |/ _\` |/ _ \\ '__|     
+ | |  | | (_| | | | | (_| | (_| |  __/ |        
+ |_|  |_|\\__,_|_| |_|\\__,_|\\__, |\\___|_|        
+                           |___/                `);
     mainQ();
 }
 
 function mainQ() {
-  console.log(`
-   _____                 _                       
-  | ____|_ __ ___  _ __ | | ___  _   _  ___  ___ 
-  |  _| | '_ \` _ \\| '_ \\| |/ _ \\| | | |/ _ \\/ _ \\
-  | |___| | | | | | |_) | | (_) | |_| |  __/  __/
-  |_____|_| |_| |_| .__/|_|\\___/ \\__, |\\___|\\___|
-   __  __         |_|            |___/           
-  |  \\/  | __ _ _ __   __ _  __ _  ___ _ __      
-  | |\\/| |/ _\` | '_ \\ / _\` |/ _\` |/ _ \\ '__|     
-  | |  | | (_| | | | | (_| | (_| |  __/ |        
-  |_|  |_|\\__,_|_| |_|\\__,_|\\__, |\\___|_|        
-                            |___/                `);
-  
-  //   inquirer
-  // .prompt(mainQuestion)
-  // .then((response) => {
-  //   console.log(response);
-  // });
-
   inquirer
     .prompt(mainQuestion)
     .then((response) => {
@@ -171,7 +164,7 @@ function mainQ() {
           break;
         case "Quit":                    // ------QUIT------
           process.exit();
-          break; 
+          break; // Is it an issue that break is grayed out?
         default:
           break;
       }
@@ -196,36 +189,38 @@ function departmentQ() { // Questions Propmts Work
     .prompt(departmentQuestion)
     .then((response) => {
       console.log(`Added ${response.addDepartment} to the database`)
-      // Need to actually add to the database
-  });
+      mainQ();
+    });
+  // Need to actually add to the database
 }
 
-function roleQ() { // Questions Propmts Work
-// prompted to enter the name, salary, and department for the role and that role is added to the database
+function roleQ() { // Add Role
   inquirer
     .prompt(roleQuestion)
     .then((response) => {
       console.log(`Added ${response.roleName} to the database`)
-      // Need to actually add to the database
+      mainQ();
     });
+  // Need to actually add to the database
 }
 
-function employeeQ() {
-// prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
+function employeeQ() { // Add Employee
   inquirer
     .prompt(employeeQuestion)
     .then((response) => {
       console.log(`Added ${response.empfName} ${response.emplName} to the database`)
+      mainQ();
     });
+  // Need to actually add to the database
 }
 
-function updateRoleQ() {
-// prompted to select an employee to update and their new role and this information is updated in the database
+function updateRoleQ() { // Update Employee Role
   inquirer
     .prompt(updateRoleQuestion)
-    .then((response) => { // Is it an issue that response grayed out?
+    .then((response) => { // Is it an issue that response is grayed out?
       //console.log(response);
       console.log(`Updated employee\'s role`)
-      // Need to actually add to the database
+      mainQ();
     });
+  // Need to actually add to the database
 }
