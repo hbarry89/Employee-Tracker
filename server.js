@@ -173,17 +173,26 @@ function mainQ() {
 
 // View Departments
 function viewDep() {
-// presented with a formatted table showing department names and department ids
+  // presented with a formatted table showing department names and department ids
+  db.query('SELECT * FROM department', function (err, results) {
+    console.log(results);
+  });
 }
 
 // View Roles
 function viewRole() {
 // presented with the job title, role id, the department that role belongs to, and the salary for that role
+  db.query('SELECT * FROM role', function (err, results) {
+    console.log(results);
+  });
 }
 
 // View Employees
 function viewEmp() {
 // presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
+  db.query('SELECT * FROM employee', function (err, results) {
+    console.log(results);
+  });
 }
 
 // Add Department
