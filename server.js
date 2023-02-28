@@ -1,14 +1,6 @@
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
-const express = require('express');
-
-const PORT = process.env.PORT || 3001;
-const app = express();
-
-// Express middleware
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
 
 // Connect to database
 const db = mysql.createConnection(
@@ -22,11 +14,6 @@ const db = mysql.createConnection(
   },
   console.log(`Connected to the employees_db database.`) // Database name here
 );
-
-// Query database
-// db.query('SELECT * FROM table', function (err, results) {
-//   console.log(results); (shows undefined right away in terminal upon testing)
-// });
 
 // Main Page Quesetions | mainQ()
 const mainQuestion = [
@@ -239,12 +226,3 @@ function updateRoleQ() {
     });
   // Need to actually update the database
 }
-
-// Default response for any other request (Not Found)
-app.use((req, res) => {
-  res.status(404).end();
-});
-
-app.listen(PORT, () => {
-  //console.log(`Server running on port ${PORT}`); (shows right away in terminal upon testing)
-});
