@@ -36,19 +36,18 @@ const PORT = process.env.PORT || 3001;
 //   console.log(`Server running on port ${PORT}`);
 // });
 
-// Main Page Quesetions
-const mainQuestion = [  // mainQ()
+// Main Page Quesetions | mainQ()
+const mainQuestion = [
   {
       type: 'list',
       message: 'What would you like to do?',
       name: 'do',
-      choices: ['View All Departments', 'View All Roles', 'View All Employees', 'Add Department', 'Add Role', 'Add Employee', 'Update Employee Role'] // ,'Quit'
-      // add next question at the end
+      choices: ['View All Departments', 'View All Roles', 'View All Employees', 'Add Department', 'Add Role', 'Add Employee', 'Update Employee Role', 'Quit']
   },
 ];
 
-// Option "Add Department" Quesetion
-const departmentQuestion = [  // departmentQ()
+// Question for "Add Department" choice | departmentQ()
+const departmentQuestion = [
   {
       type: 'input',
       message: 'What is the name of the department?',
@@ -56,8 +55,8 @@ const departmentQuestion = [  // departmentQ()
   },
 ];
 
-// Option "Add Role" Quesetion
-const roleQuestion = [  // roleQ()
+// Questions for "Add Role" choice | roleQ()
+const roleQuestion = [
   {
       type: 'input',
       message: 'What is the name of the role?',
@@ -76,8 +75,8 @@ const roleQuestion = [  // roleQ()
   },
 ];
 
-// Option "Add Employee" Quesetion
-const employeeQuestion = [  // employeeQ()
+// Questions for "Add Employee" choice | employeeQ()
+const employeeQuestion = [
   {
       type: 'input',
       message: 'What is the employee\'s first name?',
@@ -102,8 +101,8 @@ const employeeQuestion = [  // employeeQ()
   },
 ];
 
-// Option "Update Employee Role" Quesetion
-const updateRoleQuestion = [  // updateRoleQ()
+// Questions for "Update Employee Role" choice | updateRoleQ()
+const updateRoleQuestion = [
   {
     type: 'list',
     message: 'Which employee\'s role do you want to update?',
@@ -141,16 +140,16 @@ function mainQ() {
     .prompt(mainQuestion)
     .then((response) => {
         switch (response.do) {
-        case "View All Departments":    // ------VIEW------
+        case "View All Departments":   // ------VIEW------
           viewDep();
           break;
-        case "View All Roles":          // ------VIEW------
+        case "View All Roles":         // ------VIEW------
           viewRole();
           break;
         case "View All Employees":     // ------VIEW------
           viewEmp();
           break;
-        case "Add Department":          // ------ADD------
+        case "Add Department":         // ------ADD------
           departmentQ();
           break;
         case "Add Role":               // ------ADD------
@@ -159,11 +158,11 @@ function mainQ() {
         case "Add Employee":           //  ------ADD------
           employeeQ();
           break;
-        case "Update Employee Role":    // ------UPDATE------
+        case "Update Employee Role":   // ------UPDATE------
           updateRoleQ();
           break;
-        case "Quit":                    // ------QUIT------
-          process.exit();
+        case "Quit":                   // ------QUIT------
+          process.exit(console.log ('Thank you for using Employee Manager!'));
           break; // Is it an issue that break is grayed out?
         default:
           break;
@@ -171,20 +170,23 @@ function mainQ() {
     });
 }
 
+// View Departments
 function viewDep() {
 // presented with a formatted table showing department names and department ids
 }
 
+// View Roles
 function viewRole() {
 // presented with the job title, role id, the department that role belongs to, and the salary for that role
 }
 
+// View Employees
 function viewEmp() {
 // presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
 }
 
-function departmentQ() { // Questions Propmts Work
-// prompted to enter the name of the department and that department is added to the database
+// Add Department
+function departmentQ() {
   inquirer
     .prompt(departmentQuestion)
     .then((response) => {
@@ -194,7 +196,8 @@ function departmentQ() { // Questions Propmts Work
   // Need to actually add to the database
 }
 
-function roleQ() { // Add Role
+// Add Role
+function roleQ() {
   inquirer
     .prompt(roleQuestion)
     .then((response) => {
@@ -204,7 +207,8 @@ function roleQ() { // Add Role
   // Need to actually add to the database
 }
 
-function employeeQ() { // Add Employee
+// Add Employee
+function employeeQ() {
   inquirer
     .prompt(employeeQuestion)
     .then((response) => {
@@ -214,7 +218,8 @@ function employeeQ() { // Add Employee
   // Need to actually add to the database
 }
 
-function updateRoleQ() { // Update Employee Role
+// Update Employee Role
+function updateRoleQ() {
   inquirer
     .prompt(updateRoleQuestion)
     .then((response) => { // Is it an issue that response is grayed out?
@@ -222,5 +227,5 @@ function updateRoleQ() { // Update Employee Role
       console.log(`Updated employee\'s role`)
       mainQ();
     });
-  // Need to actually add to the database
+  // Need to actually update the database
 }
