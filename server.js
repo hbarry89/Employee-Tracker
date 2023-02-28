@@ -42,8 +42,9 @@ const mainQuestion = [
       type: 'list',
       message: 'What would you like to do?',
       name: 'do',
-      choices: ['View All Employees', 'Add Employee', 'Update Employee Role', 'View All Roles', 'Add Role', 'View All Departments', 'Add Department', 'Quit']
+      choices: ['View All Departments', 'View All Roles', 'View All Employees', 'Add Department', 'Add Role', 'Add Employee', 'Update Employee Role'] // ,'Quit'
       // add next question at the end
+      // mainQ()
   },
 ];
 
@@ -54,6 +55,7 @@ const departmentQuestion = [
       message: 'What is the name of the department?',
       name: 'addDepartment',
       //console.log(`Added ${department} to the database`)
+      // departmentQ()
   },
 ];
 
@@ -76,6 +78,7 @@ const roleQuestion = [
     choices: ['Engineering', 'Finance', 'Legal', 'Sales', 'Service']
   },
   //console.log(`Added ${roleName} to the database`)
+  // roleQ()
 ];
 
 // Option "Add Employee" Quesetion
@@ -103,32 +106,34 @@ const employeeQuestion = [
     choices: ['None', 'John Doe'] // there is more
   },
   //console.log(`Added ${empfName} ${emplName} to the database`)
+  // employeeQ()
 ];
 
 // Option "Update Employee Role" Quesetion
-const updateEmpRoleQuestion = [
+const updateRoleQuestion = [
   {
     type: 'list',
     message: 'Which employee\'s role do you want to update?',
-    name: 'updateEmpRoleName',
+    name: 'updateRoleName',
     choices: ['John Doe', 'Mike Chan'] // there is more
   },
   {
     type: 'list',
     message: 'Which role do you want to assign the selected employee?',
-    name: 'updateEmpRole',
+    name: 'updateRole',
     choices: ['Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Acount Manager', 'Acountant', 'Legal Team Lead'] // there is more
   },
   //console.log(`Updated employee\'s role`)
+  // updateRoleQ()
 ];
 
 init();
 
-function init(){
-    mainPage();
+function init() {
+    mainQ();
 }
 
-function mainPage() {
+function mainQ() {
   console.log(`
    _____                 _                       
   | ____|_ __ ___  _ __ | | ___  _   _  ___  ___ 
@@ -142,51 +147,71 @@ function mainPage() {
   |_|  |_|\\__,_|_| |_|\\__,_|\\__, |\\___|_|        
                             |___/                `);
   
-    inquirer
+  //   inquirer
+  // .prompt(mainQuestion)
+  // .then((response) => {
+  //   console.log(response);
+  // });
+
+  inquirer
   .prompt(mainQuestion)
-  .then((response) => {
-    console.log(response);
+  .then((answers) => {
+    console.log(answers);
+      switch (ans.option) {
+      case "View All Departments":    // ------VIEW------
+        viewDep(); // presented with a formatted table showing department names and department ids
+        break;
+      case "View All Roles":          // ------VIEW------
+        viewRole(); // presented with the job title, role id, the department that role belongs to, and the salary for that role
+        break;
+      case "View All Employees":     // ------VIEW------
+        viewEmp(); // presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
+        break;
+      case "Add Department":          // ------ADD------
+        departmentQ(); // prompted to enter the name of the department and that department is added to the database
+        break;
+      case "Add Role":               // ------ADD------
+        roleQ(); // prompted to enter the name, salary, and department for the role and that role is added to the database
+        break;
+      case "Add Employee":           //  ------ADD------
+        employeeQ(); // prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
+        break;
+      case "Update Employee Role":    // ------UPDATE------
+        updateRoleQ(); // prompted to select an employee to update and their new role and this information is updated in the database 
+        break;
+      case "Quit":                    // ------QUIT------
+        process.exit();
+        break; 
+      default:
+        break;
+    }
   });
 }
 
-// function initialQ () {
-// inquirer.prompt(initialQuestion)
-// .then(ans=>{
-//     console.log(ans);
-//     switch (ans.option) {
-//         case "View All Employees":
-//             initialQ() // 3. display employees table     ------VIEW------
-//             break;
-//         case "Add Employee":
-//             initialQ() // 6. another question             ------ADD------
-//             break;
-//         case "Update Employee Role":
-//             initialQ() // 7. another question            ------UPDATE------
-//             break;
-//         case "View All Roles":
-//             initialQ() // 2. display roles table          ------VIEW------
-//             break;
-//         case "Add Role":
-//             initialQ() // 5. another question            ------ADD------
-//             break;
-//         case "View All Departments":
-//             initialQ() // 1. display departments table   ------VIEW------
-//             break;
-//         case "Add Department":
-//             initialQ() // 4. another question            ------ADD------
-//             break;
-//         case "Quit":
-//             process.exit();                              ------QUIT------
-//             break; 
-//         default:
-//             break;
-//     }
-// })
-// }
+function viewDep() {
 
-//-------------- Hide password instructions:------------------
-// 1. Create a '.env' file and insert inside it: MYSQL_PASSWORD=rootroot
-// 2. Add that '.env' file to .gitignore (it is already in .gitignore if created by github)
-// 3. Import package: require('dotenv').config();
-// 4. On server.js level, install npm package (dotenv) by running this command: npm install dotenv
-// 5. Insert the following for your password in the connection code: process.env.MYSQL_PASSWORD,
+}
+
+function viewRole() {
+
+}
+
+function viewEmp() {
+
+}
+
+function departmentQ() {
+
+}
+
+function roleQ() {
+
+}
+
+function employeeQ() {
+
+}
+
+function updateRoleQ() {
+  
+}
