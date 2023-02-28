@@ -1,40 +1,41 @@
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
+const express = require('express');
 
 const PORT = process.env.PORT || 3001;
-// const app = express();
+const app = express();
 
 // Express middleware
-// app.use(express.urlencoded({ extended: false }));
-// app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 // Connect to database
-// const db = mysql.createConnection(
-//   {
-//     host: 'localhost', // will not work on mac, use ip: '127.0.0.1' instead
-//     // MySQL username,
-//     user: 'root',
-//     // MySQL password
-//     password: 'rootroot',
-//     database: '_db' // Database name here
-//   },
-//   console.log(`Connected to the _db database.`) // Database name here
-// );
+const db = mysql.createConnection(
+  {
+    host: 'localhost', // will not work on mac, use ip: '127.0.0.1' instead
+    // MySQL username,
+    user: 'root',
+    // MySQL password
+    password: 'rootroot',
+    database: '_db' // Database name here
+  },
+  console.log(`Connected to the _db database.`) // Database name here
+);
 
-// // Query database
-// db.query('SELECT * FROM students', function (err, results) {
-//   console.log(results);
-// });
+// Query database
+db.query('SELECT * FROM students', function (err, results) {
+  //console.log(results); (shows undefined right away in terminal upon testing)
+});
 
-// // Default response for any other request (Not Found)
-// app.use((req, res) => {
-//   res.status(404).end();
-// });
+// Default response for any other request (Not Found)
+app.use((req, res) => {
+  res.status(404).end();
+});
 
-// app.listen(PORT, () => {
-//   console.log(`Server running on port ${PORT}`);
-// });
+app.listen(PORT, () => {
+  //console.log(`Server running on port ${PORT}`); (shows right away in terminal upon testing)
+});
 
 // Main Page Quesetions | mainQ()
 const mainQuestion = [
