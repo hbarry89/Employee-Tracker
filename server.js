@@ -145,38 +145,37 @@ function mainQ() {
   // });
 
   inquirer
-  .prompt(mainQuestion)
-  .then((answers) => {
-    //console.log(answers);
-      switch (answers.choices) {
-      case "View All Departments":    // ------VIEW------
-        viewDep();
-        break;
-      case "View All Roles":          // ------VIEW------
-        viewRole();
-        break;
-      case "View All Employees":     // ------VIEW------
-        viewEmp();
-        break;
-      case "Add Department":          // ------ADD------
-        departmentQ();
-        break;
-      case "Add Role":               // ------ADD------
-        roleQ();
-        break;
-      case "Add Employee":           //  ------ADD------
-        employeeQ();
-        break;
-      case "Update Employee Role":    // ------UPDATE------
-        updateRoleQ();
-        break;
-      case "Quit":                    // ------QUIT------
-        process.exit();
-        break; 
-      default:
-        break;
-    }
-  });
+    .prompt(mainQuestion)
+    .then((response) => {
+        switch (response.do) {
+        case "View All Departments":    // ------VIEW------
+          viewDep();
+          break;
+        case "View All Roles":          // ------VIEW------
+          viewRole();
+          break;
+        case "View All Employees":     // ------VIEW------
+          viewEmp();
+          break;
+        case "Add Department":          // ------ADD------
+          departmentQ();
+          break;
+        case "Add Role":               // ------ADD------
+          roleQ();
+          break;
+        case "Add Employee":           //  ------ADD------
+          employeeQ();
+          break;
+        case "Update Employee Role":    // ------UPDATE------
+          updateRoleQ();
+          break;
+        case "Quit":                    // ------QUIT------
+          process.exit();
+          break; 
+        default:
+          break;
+      }
+    });
 }
 
 function viewDep() {
@@ -191,42 +190,42 @@ function viewEmp() {
 // presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
 }
 
-function departmentQ() {
+function departmentQ() { // Questions Propmts Work
 // prompted to enter the name of the department and that department is added to the database
   inquirer
-  .prompt(departmentQuestion)
-  .then((response) => {
-    console.log(response);
-    //console.log(`Added ${department} to the database`)
+    .prompt(departmentQuestion)
+    .then((response) => {
+      console.log(`Added ${response.addDepartment} to the database`)
+      // Need to actually add to the database
   });
 }
 
-function roleQ() {
+function roleQ() { // Questions Propmts Work
 // prompted to enter the name, salary, and department for the role and that role is added to the database
   inquirer
-  .prompt(roleQuestion)
-  .then((response) => {
-    console.log(response);
-  //console.log(`Added ${roleName} to the database`)
-  });
+    .prompt(roleQuestion)
+    .then((response) => {
+      console.log(`Added ${response.roleName} to the database`)
+      // Need to actually add to the database
+    });
 }
 
 function employeeQ() {
 // prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
   inquirer
-  .prompt(employeeQuestion)
-  .then((response) => {
-    console.log(response);
-  //console.log(`Added ${empfName} ${emplName} to the database`)
-  });
+    .prompt(employeeQuestion)
+    .then((response) => {
+      console.log(`Added ${response.empfName} ${response.emplName} to the database`)
+    });
 }
 
 function updateRoleQ() {
 // prompted to select an employee to update and their new role and this information is updated in the database
   inquirer
-  .prompt(updateRoleQuestion)
-  .then((response) => {
-    console.log(response);
-  //console.log(`Updated employee\'s role`)
-  });
+    .prompt(updateRoleQuestion)
+    .then((response) => { // Is it an issue that response grayed out?
+      //console.log(response);
+      console.log(`Updated employee\'s role`)
+      // Need to actually add to the database
+    });
 }
