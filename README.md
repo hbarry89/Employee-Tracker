@@ -31,8 +31,7 @@
 - [MySQL2 Package](https://www.npmjs.com/package/mysql2)
 - [Inquirer Package](https://www.npmjs.com/package/inquirer/v/8.2.4)
 - [console.table Package](https://www.npmjs.com/package/console.table)
-
-- ASCII Art: [patorjk](https://patorjk.com/software/taag/) (Using Ivrit Font)
+- ASCII Art: [patorjk](https://patorjk.com/software/taag/)
 
 ### Applications Used :gear:
 - VS Code

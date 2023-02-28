@@ -1,7 +1,6 @@
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
-// require('dotenv').config(); // To hide mysql password in connection
 
 const PORT = process.env.PORT || 3001;
 // const app = express();
@@ -17,7 +16,7 @@ const PORT = process.env.PORT || 3001;
 //     // MySQL username,
 //     user: 'root',
 //     // MySQL password
-//     password: 'rootroot', // process.env.MYSQL_PASSWORD
+//     password: 'rootroot',
 //     database: '_db' // Database name here
 //   },
 //   console.log(`Connected to the _db database.`) // Database name here
@@ -37,35 +36,99 @@ const PORT = process.env.PORT || 3001;
 //   console.log(`Server running on port ${PORT}`);
 // });
 
+// Main Page Quesetions
 const mainQuestion = [
-    {
-        type: 'list',
-        message: 'What would you like to do?',
-        name: 'do',
-        choices: ['View All Employees', 'Add Employees', 'Update Employee Role', 'View All Roles', 'Add Roles', 'View All Departments', 'Add Departments', 'Quit']
-        // in the choices array, double check options and spelling, add next question at the end
-    },
+  {
+      type: 'list',
+      message: 'What would you like to do?',
+      name: 'do',
+      choices: ['View All Employees', 'Add Employee', 'Update Employee Role', 'View All Roles', 'Add Role', 'View All Departments', 'Add Department', 'Quit']
+      // add next question at the end
+  },
 ];
 
-// const secondQuestion = [
-//   {
-//       type: 'list',
-//       message: 'What is the name of the department?',
-//       name: 'department',
-//       choices: ['', '']
-//   },
-// ];
+// Option "Add Department" Quesetion
+const departmentQuestion = [
+  {
+      type: 'input',
+      message: 'What is the name of the department?',
+      name: 'addDepartment',
+      //console.log(`Added ${department} to the database`)
+  },
+];
 
-// const thirdQuestion = [
-//   {
-//       type: 'list',
-//       message: 'What is the name of the department?',
-//       name: 'department',
-//       choices: ['', '']
-//   },
-// ];
+// Option "Add Role" Quesetion
+const roleQuestion = [
+  {
+      type: 'input',
+      message: 'What is the name of the role?',
+      name: 'roleName',
+  },
+  {
+    type: 'input',
+    message: 'What is the salary of the role?',
+    name: 'roleSalary',
+  },
+  {
+    type: 'list',
+    message: 'Which department does the role belong to?',
+    name: 'roleDepartment',
+    choices: ['Engineering', 'Finance', 'Legal', 'Sales', 'Service']
+  },
+  //console.log(`Added ${roleName} to the database`)
+];
 
-function init() {
+// Option "Add Employee" Quesetion
+const employeeQuestion = [
+  {
+      type: 'input',
+      message: 'What is the employee\'s first name?',
+      name: 'empfName',
+  },
+  {
+    type: 'input',
+    message: 'What is the employee\'s last name?',
+    name: 'emplName',
+  },
+  {
+    type: 'list',
+    message: 'What is the employee\'s role?',
+    name: 'empRole',
+    choices: ['Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Acount Manager', 'Acountant', 'Legal Team Lead'] // there is more
+  },
+  {
+    type: 'list',
+    message: 'Who is the employee\'s manager?',
+    name: 'empManager',
+    choices: ['None', 'John Doe'] // there is more
+  },
+  //console.log(`Added ${empfName} ${emplName} to the database`)
+];
+
+// Option "Update Employee Role" Quesetion
+const updateEmpRoleQuestion = [
+  {
+    type: 'list',
+    message: 'Which employee\'s role do you want to update?',
+    name: 'updateEmpRoleName',
+    choices: ['John Doe', 'Mike Chan'] // there is more
+  },
+  {
+    type: 'list',
+    message: 'Which role do you want to assign the selected employee?',
+    name: 'updateEmpRole',
+    choices: ['Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Acount Manager', 'Acountant', 'Legal Team Lead'] // there is more
+  },
+  //console.log(`Updated employee\'s role`)
+];
+
+init();
+
+function init(){
+    mainPage();
+}
+
+function mainPage() {
   console.log(`
    _____                 _                       
   | ____|_ __ ___  _ __ | | ___  _   _  ___  ___ 
@@ -83,37 +146,38 @@ function init() {
   .prompt(mainQuestion)
   .then((response) => {
     console.log(response);
-  }
-  );
+  });
 }
-
-init();
-
-//-------------------------- From Instructor
-// const initialQuestion = [
-//     {
-//        type: 'list',
-//      message: 'What would you like to do?',
-//      choices: ['View All Employees', "Add Employee", "Update Employee Role", "View All Roles", "Add Role", "View All Departments", "Add Department", "Quit", "want to try again"],
-//      name: 'option' 
-//     }
-// ]
-
-// init();
-// function init(){
-//     initialQ();
-// }
 
 // function initialQ () {
 // inquirer.prompt(initialQuestion)
 // .then(ans=>{
 //     console.log(ans);
-//     // ans.option === "want to try again" ? initialQ() : process.exit();
 //     switch (ans.option) {
-//         case "want to try again":
-//             initialQ()
+//         case "View All Employees":
+//             initialQ() // 3. display employees table     ------VIEW------
 //             break;
-    
+//         case "Add Employee":
+//             initialQ() // 6. another question             ------ADD------
+//             break;
+//         case "Update Employee Role":
+//             initialQ() // 7. another question            ------UPDATE------
+//             break;
+//         case "View All Roles":
+//             initialQ() // 2. display roles table          ------VIEW------
+//             break;
+//         case "Add Role":
+//             initialQ() // 5. another question            ------ADD------
+//             break;
+//         case "View All Departments":
+//             initialQ() // 1. display departments table   ------VIEW------
+//             break;
+//         case "Add Department":
+//             initialQ() // 4. another question            ------ADD------
+//             break;
+//         case "Quit":
+//             process.exit();                              ------QUIT------
+//             break; 
 //         default:
 //             break;
 //     }
