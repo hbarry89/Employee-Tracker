@@ -37,30 +37,27 @@ const PORT = process.env.PORT || 3001;
 // });
 
 // Main Page Quesetions
-const mainQuestion = [
+const mainQuestion = [  // mainQ()
   {
       type: 'list',
       message: 'What would you like to do?',
       name: 'do',
       choices: ['View All Departments', 'View All Roles', 'View All Employees', 'Add Department', 'Add Role', 'Add Employee', 'Update Employee Role'] // ,'Quit'
       // add next question at the end
-      // mainQ()
   },
 ];
 
 // Option "Add Department" Quesetion
-const departmentQuestion = [
+const departmentQuestion = [  // departmentQ()
   {
       type: 'input',
       message: 'What is the name of the department?',
       name: 'addDepartment',
-      //console.log(`Added ${department} to the database`)
-      // departmentQ()
   },
 ];
 
 // Option "Add Role" Quesetion
-const roleQuestion = [
+const roleQuestion = [  // roleQ()
   {
       type: 'input',
       message: 'What is the name of the role?',
@@ -77,12 +74,10 @@ const roleQuestion = [
     name: 'roleDepartment',
     choices: ['Engineering', 'Finance', 'Legal', 'Sales', 'Service']
   },
-  //console.log(`Added ${roleName} to the database`)
-  // roleQ()
 ];
 
 // Option "Add Employee" Quesetion
-const employeeQuestion = [
+const employeeQuestion = [  // employeeQ()
   {
       type: 'input',
       message: 'What is the employee\'s first name?',
@@ -105,12 +100,10 @@ const employeeQuestion = [
     name: 'empManager',
     choices: ['None', 'John Doe'] // there is more
   },
-  //console.log(`Added ${empfName} ${emplName} to the database`)
-  // employeeQ()
 ];
 
 // Option "Update Employee Role" Quesetion
-const updateRoleQuestion = [
+const updateRoleQuestion = [  // updateRoleQ()
   {
     type: 'list',
     message: 'Which employee\'s role do you want to update?',
@@ -123,8 +116,6 @@ const updateRoleQuestion = [
     name: 'updateRole',
     choices: ['Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Acount Manager', 'Acountant', 'Legal Team Lead'] // there is more
   },
-  //console.log(`Updated employee\'s role`)
-  // updateRoleQ()
 ];
 
 init();
@@ -159,25 +150,25 @@ function mainQ() {
     console.log(answers);
       switch (ans.option) {
       case "View All Departments":    // ------VIEW------
-        viewDep(); // presented with a formatted table showing department names and department ids
+        viewDep();
         break;
       case "View All Roles":          // ------VIEW------
-        viewRole(); // presented with the job title, role id, the department that role belongs to, and the salary for that role
+        viewRole();
         break;
       case "View All Employees":     // ------VIEW------
-        viewEmp(); // presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
+        viewEmp();
         break;
       case "Add Department":          // ------ADD------
-        departmentQ(); // prompted to enter the name of the department and that department is added to the database
+        departmentQ();
         break;
       case "Add Role":               // ------ADD------
-        roleQ(); // prompted to enter the name, salary, and department for the role and that role is added to the database
+        roleQ();
         break;
       case "Add Employee":           //  ------ADD------
-        employeeQ(); // prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
+        employeeQ();
         break;
       case "Update Employee Role":    // ------UPDATE------
-        updateRoleQ(); // prompted to select an employee to update and their new role and this information is updated in the database 
+        updateRoleQ();
         break;
       case "Quit":                    // ------QUIT------
         process.exit();
@@ -189,29 +180,53 @@ function mainQ() {
 }
 
 function viewDep() {
-
+// presented with a formatted table showing department names and department ids
 }
 
 function viewRole() {
-
+// presented with the job title, role id, the department that role belongs to, and the salary for that role
 }
 
 function viewEmp() {
-
+// presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
 }
 
 function departmentQ() {
-
+// prompted to enter the name of the department and that department is added to the database
+  inquirer
+  .prompt(departmentQuestion)
+  .then((response) => {
+    console.log(response);
+    //console.log(`Added ${department} to the database`)
+  });
 }
 
 function roleQ() {
-
+// prompted to enter the name, salary, and department for the role and that role is added to the database
+  inquirer
+  .prompt(roleQuestion)
+  .then((response) => {
+    console.log(response);
+  //console.log(`Added ${roleName} to the database`)
+  });
 }
 
 function employeeQ() {
-
+// prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
+  inquirer
+  .prompt(employeeQuestion)
+  .then((response) => {
+    console.log(response);
+  //console.log(`Added ${empfName} ${emplName} to the database`)
+  });
 }
 
 function updateRoleQ() {
-  
+// prompted to select an employee to update and their new role and this information is updated in the database
+  inquirer
+  .prompt(updateRoleQuestion)
+  .then((response) => {
+    console.log(response);
+  //console.log(`Updated employee\'s role`)
+  });
 }
