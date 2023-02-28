@@ -70,13 +70,13 @@ const employeeQuestion = [
     type: 'list',
     message: 'What is the employee\'s role?',
     name: 'empRole',
-    choices: ['Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Acount Manager', 'Acountant', 'Legal Team Lead'] // there is more
+    choices: ['Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Acount Manager', 'Acountant', 'Legal Team Lead', 'Lawyer', 'Customer Service']
   },
   {
     type: 'list',
     message: 'Who is the employee\'s manager?',
     name: 'empManager',
-    choices: ['None', 'John Doe'] // there is more
+    choices: ['None', 'John Doe', 'Mike Chan', 'Ashley Rodriguez', 'Kevin Tupik', 'Kunal Singh', 'Malia Brown']
   },
 ];
 
@@ -86,13 +86,13 @@ const updateRoleQuestion = [
     type: 'list',
     message: 'Which employee\'s role do you want to update?',
     name: 'updateRoleName',
-    choices: ['John Doe', 'Mike Chan'] // there is more
+    choices: ['None', 'John Doe', 'Mike Chan', 'Ashley Rodriguez', 'Kevin Tupik', 'Kunal Singh', 'Malia Brown']
   },
   {
     type: 'list',
     message: 'Which role do you want to assign the selected employee?',
     name: 'updateRole',
-    choices: ['Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Acount Manager', 'Acountant', 'Legal Team Lead'] // there is more
+    choices: ['Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Acount Manager', 'Acountant', 'Legal Team Lead', 'Lawyer', 'Customer Service']
   },
 ];
 
@@ -151,7 +151,6 @@ function mainQ() {
 
 // View Departments
 function viewDep() {
-  // presented with a formatted table showing department names and department ids
   db.query('SELECT * FROM department', function (err, results) {
     console.table(results);
     mainQ();
@@ -160,7 +159,6 @@ function viewDep() {
 
 // View Roles
 function viewRole() {
-// presented with the job title, role id, the department that role belongs to, and the salary for that role
   db.query('SELECT * FROM role', function (err, results) {
     console.table(results);
     mainQ();
@@ -169,7 +167,6 @@ function viewRole() {
 
 // View Employees
 function viewEmp() {
-// presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
   db.query('SELECT * FROM employee', function (err, results) {
     //console.log(results);
     console.table(results);
@@ -182,13 +179,13 @@ function departmentQ() {
   inquirer
     .prompt(departmentQuestion)
     .then((response) => {
+      db.query(`INSERT INTO department (name) VALUES ("${response.addDepartment}")`, function (err, results) {
+        if (err) throw err;
+        //console.log(results);
+      });
       console.log(`Added ${response.addDepartment} to the database`)
       mainQ();
     });
-  // Need to actually add to the database
-  db.query(`INSERT INTO department (name) VALUES ("${response.addDepartment}")`, function (err, results) {
-    //console.log(results);
-  });
 }
 
 // Add Role
@@ -196,14 +193,13 @@ function roleQ() {
   inquirer
     .prompt(roleQuestion)
     .then((response) => {
+      db.query(`INSERT INTO role (name, salary, department_id) VALUES ("${response.roleName}", ${response.roleSalary}, ${response.roleDepartment})`, function (err, results) {
+        if (err) throw err;
+        //console.log(results);
+      });
       console.log(`Added ${response.roleName} to the database`)
       mainQ();
     });
-  // Need to actually add to the database
-  db.query(`INSERT INTO role (name, salary, department_id) VALUES ("${response.roleName}", ${response.roleSalary}, ${response.roleDepartment})`, function (err, results) {
-    //if (err) throw err;
-    console.log(results);
-  });
 }
 
 // Add Employee
@@ -211,24 +207,25 @@ function employeeQ() {
   inquirer
     .prompt(employeeQuestion)
     .then((response) => {
+      db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("${response.empfName}", "${response.emplName}", ${response.empRole}, ${response.empManager})`, function (err, results) {
+        if (err) throw err;
+        //console.log(results);
+      });
       console.log(`Added ${response.empfName} ${response.emplName} to the database`)
       mainQ();
     });
-  // Need to actually add to the database
-  db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("${response.empfName}", "${response.emplName}", ${response.empRole}, ${response.empManager})`, function (err, results) {
-    //if (err) throw err;
-    console.log(results);
-  });
 }
 
 // Update Employee Role
 function updateRoleQ() {
   inquirer
     .prompt(updateRoleQuestion)
-    .then((response) => { // Is it an issue that response is grayed out?
-      //console.log(response);
+    .then((response) => {
+      db.query(`UPDATE employee set role_id = ? where id = ?;`, function (err, results) {
+        if (err) throw err;
+        //console.log(results);
+      });
       console.log(`Updated employee\'s role`)
       mainQ();
     });
-  // Need to actually update the database
 }
