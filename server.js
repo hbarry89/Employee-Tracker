@@ -158,8 +158,8 @@ function viewDep() {
 
 // View Roles
 function viewRole() {
-  db.query('SELECT * FROM role', function (err, results) {
-    // select course_names.name, department.name from course_names JOIN department ON course_names.department = department.id;
+  db.query('SELECT role.id, role.name, role.salary, department.name FROM role JOIN department ON role.department_id = department.id', function (err, results) {
+    // role: id, name, x, salary | department: name
     console.table(results);
     mainQ();
   });
@@ -167,7 +167,8 @@ function viewRole() {
 
 // View Employees
 function viewEmp() {
-  db.query('SELECT * FROM employee', function (err, results) {
+  db.query('SELECT employee.id, role.name, role.salary, department.name FROM role JOIN department ON role.department_id = department.id', function (err, results) {
+    // employee: id, first name, last name | role: name, | department: name | role: salary | employee: manager_id
     //console.log(results);
     console.table(results);
     mainQ();
