@@ -50,7 +50,7 @@ const roleQuestion = [
     type: 'list',
     message: 'Which department does the role belong to?',
     name: 'roleDepartment',
-    choices: [{name:'Engineering', value: 1}, {name: 'Finance', value: 2}, {name: 'Legal', value: 3}, {name:'Sales', value: 4}, {name: 'Service', value: 5}]
+    choices: [{name:'Engineering', value: 1}, {name: 'Finance', value: 2}, {name: 'Legal', value: 3}, {name:'Sales', value: 4}]
     // array.map() to create a choices array from the departments in the database consisting of objects with the name of the department and id as a value.
   },
 ];
@@ -77,7 +77,7 @@ const employeeQuestion = [
     type: 'list',
     message: 'Who is the employee\'s manager?',
     name: 'empManager',
-    choices: [{name: 'None', value: 7}, {name: 'John Doe', value: 1}, {name: 'Mike Chan', value: 2}, {name: 'Ashley Rodriguez', value: 3}, {name: 'Kevin Tupik', value: 4}, {name: 'Kunal Singh', value: 5}, {name: 'Malia Brown', value: 6}]
+    choices: [{name: 'None', value: 9}, {name: 'John Doe', value: 1}, {name: 'Mike Chan', value: 2}, {name: 'Ashley Rodriguez', value: 3}, {name: 'Kevin Tupik', value: 4}, {name: 'Kunal Singh', value: 5}, {name: 'Malia Brown', value: 6}, {name: 'Sarah Lourd', value: 7}, {name: 'Tom Allen', value: 8}]
   },
 ];
 
@@ -87,7 +87,7 @@ const updateRoleQuestion = [
     type: 'list',
     message: 'Which employee\'s role do you want to update?',
     name: 'updateRoleName',
-    choices: [{name: 'John Doe', value: 1}, {name: 'Mike Chan', value: 2}, {name: 'Ashley Rodriguez', value: 3}, {name: 'Kevin Tupik', value: 4}, {name: 'Kunal Singh', value: 5}, {name: 'Malia Brown', value: 6}]
+    choices: [{name: 'John Doe', value: 1}, {name: 'Mike Chan', value: 2}, {name: 'Ashley Rodriguez', value: 3}, {name: 'Kevin Tupik', value: 4}, {name: 'Kunal Singh', value: 5}, {name: 'Malia Brown', value: 6}, {name: 'Sarah Lourd', value: 7}, {name: 'Tom Allen', value: 8}]
   },
   {
     type: 'list',
@@ -204,7 +204,6 @@ function roleQ() {
       console.log(`Added ${response.roleName} to the database`)
       mainQ();
     });
-    // `INSERT INTO role (name, salary, department_id) VALUES ("${response.roleName}", ${response.roleSalary}, ${response.roleDepartment})`
 }
 
 // Add Employee
@@ -212,7 +211,6 @@ function employeeQ() {
   inquirer
     .prompt(employeeQuestion)
     .then((response) => {
-      // "INSERT INTO employee (name, salary, department_id) VALUES (?, ?, ?)", [response.roleName, response.roleSalary, response.roleDepartment]
       db.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", [response.empfName, response.emplName, response.empRole, response.empManager], function (err, results) {
         if (err) throw err;
         //console.log(results);
@@ -227,7 +225,6 @@ function updateRoleQ() {
   inquirer
     .prompt(updateRoleQuestion)
     .then((response) => {
-      //db.query(`SELECT (id) FROM role where name = ?;`, [], function (err, results) { TODO
       let role_id = response.updateRole
       let id = response.updateRoleName
       db.query("UPDATE employee set role_id = ? where id = ?;", [role_id, id], function (err, results) {
@@ -238,5 +235,3 @@ function updateRoleQ() {
       mainQ();
     });
 }
-
-// 222 update role question, after user sselecting the one of the employee, you haev to display the list of role, then if user select one of the role then u can update using the id of employee and ir of the role
