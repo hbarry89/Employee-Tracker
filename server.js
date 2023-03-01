@@ -77,7 +77,7 @@ const employeeQuestion = [
     type: 'list',
     message: 'Who is the employee\'s manager?',
     name: 'empManager',
-    choices: [{name: 'None', value: 0}, {name: 'John Doe', value: 1}, {name: 'Mike Chan', value: 2}, {name: 'Ashley Rodriguez', value: 3}, {name: 'Kevin Tupik', value: 4}, {name: 'Kunal Singh', value: 5}, {name: 'Malia Brown', value: 6}]
+    choices: [{name: 'None', value: 7}, {name: 'John Doe', value: 1}, {name: 'Mike Chan', value: 2}, {name: 'Ashley Rodriguez', value: 3}, {name: 'Kevin Tupik', value: 4}, {name: 'Kunal Singh', value: 5}, {name: 'Malia Brown', value: 6}]
   },
 ];
 
