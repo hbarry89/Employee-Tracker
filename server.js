@@ -228,6 +228,8 @@ function updateRoleQ() {
     .prompt(updateRoleQuestion)
     .then((response) => {
       //db.query(`SELECT (id) FROM role where name = ?;`, [], function (err, results) { TODO
+      let role_id = response.updateRole
+      let id = response.updateRoleName
       db.query("UPDATE employee set role_id = ? where id = ?;", [role_id, id], function (err, results) {
         if (err) throw err;
         //console.log(results);
