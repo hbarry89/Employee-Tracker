@@ -228,7 +228,7 @@ function updateRoleQ() {
     .prompt(updateRoleQuestion)
     .then((response) => {
       //db.query(`SELECT (id) FROM role where name = ?;`, [], function (err, results) { TODO
-      db.query(`UPDATE employee set role_id = ? where id = ?;`, [], function (err, results) {
+      db.query("UPDATE employee set role_id = ? where id = ?;", [role_id, id], function (err, results) {
         if (err) throw err;
         //console.log(results);
       });
