@@ -71,13 +71,13 @@ const employeeQuestion = [
     type: 'list',
     message: 'What is the employee\'s role?',
     name: 'empRole',
-    choices: ['Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Acount Manager', 'Acountant', 'Legal Team Lead', 'Lawyer', 'Customer Service']
+    choices: [{name: 'Sales Lead', value: 1}, {name: 'Salesperson', value: 2}, {name: 'Lead Engineer', value: 3}, {name: 'Software Engineer', value: 4}, {name: 'Acount Manager', value: 5}, {name: 'Acountant', value: 6}, {name: 'Legal Team Lead', value: 7}, {name: 'Lawyer', value: 8}]
   },
   {
     type: 'list',
     message: 'Who is the employee\'s manager?',
     name: 'empManager',
-    choices: ['None', 'John Doe', 'Mike Chan', 'Ashley Rodriguez', 'Kevin Tupik', 'Kunal Singh', 'Malia Brown']
+    choices: [{name: 'None', value: 0}, {name: 'John Doe', value: 1}, {name: 'Mike Chan', value: 2}, {name: 'Ashley Rodriguez', value: 3}, {name: 'Kevin Tupik', value: 4}, {name: 'Kunal Singh', value: 5}, {name: 'Malia Brown', value: 6}]
   },
 ];
 
@@ -87,13 +87,13 @@ const updateRoleQuestion = [
     type: 'list',
     message: 'Which employee\'s role do you want to update?',
     name: 'updateRoleName',
-    choices: ['John Doe', 'Mike Chan', 'Ashley Rodriguez', 'Kevin Tupik', 'Kunal Singh', 'Malia Brown']
+    choices: [{name: 'John Doe', value: 1}, {name: 'Mike Chan', value: 2}, {name: 'Ashley Rodriguez', value: 3}, {name: 'Kevin Tupik', value: 4}, {name: 'Kunal Singh', value: 5}, {name: 'Malia Brown', value: 6}]
   },
   {
     type: 'list',
     message: 'Which role do you want to assign the selected employee?',
     name: 'updateRole',
-    choices: ['Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Acount Manager', 'Acountant', 'Legal Team Lead', 'Lawyer']
+    choices: [{name: 'Sales Lead', value: 1}, {name: 'Salesperson', value: 2}, {name: 'Lead Engineer', value: 3}, {name: 'Software Engineer', value: 4}, {name: 'Acount Manager', value: 5}, {name: 'Acountant', value: 6}, {name: 'Legal Team Lead', value: 7}, {name: 'Lawyer', value: 8}]
   },
 ];
 
@@ -169,7 +169,7 @@ function viewRole() {
 
 // View Employees
 function viewEmp() {
-  db.query('SELECT * from employees', function (err, results) {
+  db.query('SELECT * from employee', function (err, results) {
     // SELECT employee.id, employee.first_name, employee.last_name, role.name, department.name, role.salary, employee.manager_id FROM role JOIN department ON role.department_id = department.id
     // employee: id, first name, last name | role: name, | department: name | role: salary | employee: manager_id
     //console.log(results);
@@ -197,18 +197,14 @@ function roleQ() {
   inquirer
     .prompt(roleQuestion)
     .then((response) => {
-      db.query(
-        //`INSERT INTO role (name, salary, department_id) VALUES ("${response.roleName}", ${response.roleSalary}, ${response.roleDepartment})`,
-        "INSERT INTO role (name, salary, department_id) VALUES (?, ?, ?)",
-         [response.roleName, response.roleSalary, response.roleDepartment], function (err, results) {
-        // INSERT INTO role (name, salary, department_id) VALUES ("${response.roleName}", ${response.roleSalary}, ${response.roleDepartment})
-        // INSERT INTO role (name, salary, department_id) VALUES (?, ?, ?)
+      db.query("INSERT INTO role (name, salary, department_id) VALUES (?, ?, ?)", [response.roleName, response.roleSalary, response.roleDepartment], function (err, results) {
         if (err) throw err;
         //console.log(results);
       });
       console.log(`Added ${response.roleName} to the database`)
       mainQ();
     });
+    // `INSERT INTO role (name, salary, department_id) VALUES ("${response.roleName}", ${response.roleSalary}, ${response.roleDepartment})`
 }
 
 // Add Employee
@@ -216,7 +212,8 @@ function employeeQ() {
   inquirer
     .prompt(employeeQuestion)
     .then((response) => {
-      db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("${response.empfName}", "${response.emplName}", ${response.empRole}, ${response.empManager})`, function (err, results) {
+      // "INSERT INTO employee (name, salary, department_id) VALUES (?, ?, ?)", [response.roleName, response.roleSalary, response.roleDepartment]
+      db.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", [response.empfName, response.emplName, response.empRole, response.empManager], function (err, results) {
         if (err) throw err;
         //console.log(results);
       });
@@ -230,6 +227,7 @@ function updateRoleQ() {
   inquirer
     .prompt(updateRoleQuestion)
     .then((response) => {
+      //db.query(`SELECT (id) FROM role where name = ?;`, [], function (err, results) { TODO
       db.query(`UPDATE employee set role_id = ? where id = ?;`, [], function (err, results) {
         if (err) throw err;
         //console.log(results);
