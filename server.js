@@ -50,7 +50,8 @@ const roleQuestion = [
     type: 'list',
     message: 'Which department does the role belong to?',
     name: 'roleDepartment',
-    choices: ['Engineering', 'Finance', 'Legal', 'Sales', 'Service']
+    choices: [{name:'Engineering', value: 1}, {name: 'Finance', value: 2}, {name: 'Legal', value: 3}, {name:'Sales', value: 4}, {name: 'Service', value: 5}]
+    // array.map() to create a choices array from the departments in the database consisting of objects with the name of the department and id as a value.
   },
 ];
 
@@ -86,7 +87,7 @@ const updateRoleQuestion = [
     type: 'list',
     message: 'Which employee\'s role do you want to update?',
     name: 'updateRoleName',
-    choices: ['None', 'John Doe', 'Mike Chan', 'Ashley Rodriguez', 'Kevin Tupik', 'Kunal Singh', 'Malia Brown']
+    choices: ['John Doe', 'Mike Chan', 'Ashley Rodriguez', 'Kevin Tupik', 'Kunal Singh', 'Malia Brown']
   },
   {
     type: 'list',
@@ -158,8 +159,9 @@ function viewDep() {
 
 // View Roles
 function viewRole() {
-  db.query('SELECT role.id, role.name, role.salary, department.name FROM role JOIN department ON role.department_id = department.id', function (err, results) {
-    // role: id, name, x, salary | department: name
+  db.query('SELECT * from role', function (err, results) {
+    // SELECT role.id, role.name, department.name, role.salary FROM role JOIN department ON role.department_id = department.id
+    // role: id, name | department: name | role: salary
     console.table(results);
     mainQ();
   });
@@ -167,7 +169,8 @@ function viewRole() {
 
 // View Employees
 function viewEmp() {
-  db.query('SELECT employee.id, role.name, role.salary, department.name FROM role JOIN department ON role.department_id = department.id', function (err, results) {
+  db.query('SELECT * from employees', function (err, results) {
+    // SELECT employee.id, employee.first_name, employee.last_name, role.name, department.name, role.salary, employee.manager_id FROM role JOIN department ON role.department_id = department.id
     // employee: id, first name, last name | role: name, | department: name | role: salary | employee: manager_id
     //console.log(results);
     console.table(results);
@@ -194,7 +197,12 @@ function roleQ() {
   inquirer
     .prompt(roleQuestion)
     .then((response) => {
-      db.query(`INSERT INTO role (name, salary, department_id) VALUES ("${response.roleName}", ${response.roleSalary}, ${response.roleDepartment})`, function (err, results) {
+      db.query(
+        //`INSERT INTO role (name, salary, department_id) VALUES ("${response.roleName}", ${response.roleSalary}, ${response.roleDepartment})`,
+        "INSERT INTO role (name, salary, department_id) VALUES (?, ?, ?)",
+         [response.roleName, response.roleSalary, response.roleDepartment], function (err, results) {
+        // INSERT INTO role (name, salary, department_id) VALUES ("${response.roleName}", ${response.roleSalary}, ${response.roleDepartment})
+        // INSERT INTO role (name, salary, department_id) VALUES (?, ?, ?)
         if (err) throw err;
         //console.log(results);
       });
@@ -222,7 +230,7 @@ function updateRoleQ() {
   inquirer
     .prompt(updateRoleQuestion)
     .then((response) => {
-      db.query(`UPDATE employee set role_id = ? where id = ?;`, function (err, results) {
+      db.query(`UPDATE employee set role_id = ? where id = ?;`, [], function (err, results) {
         if (err) throw err;
         //console.log(results);
       });
