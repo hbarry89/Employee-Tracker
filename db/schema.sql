@@ -1,5 +1,7 @@
+-- Delete Database --
 DROP DATABASE IF EXISTS employees_db;
--- Create Databases --
+
+-- Create Database --
 CREATE DATABASE employees_db;
 
 -- Use employees_db --

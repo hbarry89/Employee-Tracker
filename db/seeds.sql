@@ -9,16 +9,26 @@ VALUES ("Engineering"),
        ("Sales");
 
 INSERT INTO role (name, salary, department_id)
-VALUES ("Role 1", 50000, 1),
-       ("Role 2", 60000, 2),
-       ("Role 3", 70000, 3);
+VALUES ("Sales Lead", 100000, 1),
+       ("Salesperson", 80000, 1),
+       ("Lead Engineer", 150000, 2),
+       ("Software Engineer", 120000, 2),
+       ("Acount Manager", 160000, 3),
+       ("Acountant", 125000, 3),
+       ("Legal Team Lead", 250000, 4),
+       ("Lawyer", 190000, 4);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Elliot", "Smith", 1, NULL),
-       ("Amira", "Afzal", 2, 1),
-       ("Christoper", "Lee", 3, 2);
+VALUES ("John", "Doe", 1, NULL),
+       ("Mike", "Chan", 2, 1),
+       ("Ashley", "Rodriguez", 3, NULL),
+       ("Kevin", "Tupik", 4, 3),
+       ("Kunal", "Singh", 5, NULL),
+       ("Malia", "Brown", 6, 5),
+       ("Sarah", "Lourd", 7, NULL),
+       ("Tom", "Allen", 8, 7);
 
-       -- INSERT INTO department (name) VALUES (?);
+-- INSERT INTO department (name) VALUES (?);
 
 -- INSERT INTO role (name, salary, department_id) VALUES (?, ?, ?);
 -- INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?);

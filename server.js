@@ -92,7 +92,7 @@ const updateRoleQuestion = [
     type: 'list',
     message: 'Which role do you want to assign the selected employee?',
     name: 'updateRole',
-    choices: ['Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Acount Manager', 'Acountant', 'Legal Team Lead', 'Lawyer', 'Customer Service']
+    choices: ['Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Acount Manager', 'Acountant', 'Legal Team Lead', 'Lawyer']
   },
 ];
 
