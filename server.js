@@ -50,7 +50,7 @@ const roleQuestion = [
     type: 'list',
     message: 'Which department does the role belong to?',
     name: 'roleDepartment',
-    choices: [{name:'Engineering', value: 1}, {name: 'Finance', value: 2}, {name: 'Legal', value: 3}, {name:'Sales', value: 4}]
+    choices: [{name:'Sales', value: 1}, {name: 'Engineering', value: 2}, {name: 'Finance', value: 3}, {name:'Legal', value: 4}]
     // array.map() to create a choices array from the departments in the database consisting of objects with the name of the department and id as a value.
   },
 ];
