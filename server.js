@@ -159,9 +159,7 @@ function viewDep() {
 
 // View Roles
 function viewRole() {
-  db.query('SELECT * from role', function (err, results) {
-    // SELECT role.id, role.name, department.name, role.salary FROM role JOIN department ON role.department_id = department.id
-    // role: id, name | department: name | role: salary
+  db.query('SELECT role.id, role.title, department.name AS department, role.salary FROM role JOIN department ON role.department_id = department.id', function (err, results) {
     console.table(results);
     mainQ();
   });
@@ -170,8 +168,8 @@ function viewRole() {
 // View Employees
 function viewEmp() {
   db.query('SELECT * from employee', function (err, results) {
-    // SELECT employee.id, employee.first_name, employee.last_name, role.name, department.name, role.salary, employee.manager_id FROM role JOIN department ON role.department_id = department.id
-    // employee: id, first name, last name | role: name, | department: name | role: salary | employee: manager_id
+    // SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name, role.salary, employee.manager_id FROM role JOIN department ON role.department_id = department.id
+    // employee: id, first name, last name | role: title, | department: name | role: salary | employee: manager_id
     //console.log(results);
     console.table(results);
     mainQ();
@@ -197,7 +195,7 @@ function roleQ() {
   inquirer
     .prompt(roleQuestion)
     .then((response) => {
-      db.query("INSERT INTO role (name, salary, department_id) VALUES (?, ?, ?)", [response.roleName, response.roleSalary, response.roleDepartment], function (err, results) {
+      db.query("INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)", [response.roleName, response.roleSalary, response.roleDepartment], function (err, results) {
         if (err) throw err;
         //console.log(results);
       });
