@@ -7,13 +7,89 @@
 
 ## Usage
 
-- [Click here](*) for a video demo of this application.
+- [Click here](https://drive.google.com/file/d/1g6JWm6U7-4sG2DeQWBQBck1h3Vjw_Ed6/view) for a video demo of this application.
 
 ---------------------------
 
-- Screenshots:
+- When you start the application, you are presented with a nice ASCII art sign that reads: "Employee Manager" and the prompt questions below it:
 
-<img src="./demo-images/demo1.png" width="150" height="150">
+<img src="./demo-images/demo1.png" width="300" height="350">
+
+---------------------------
+
+- Department table is shown when you select "View All Departments":
+
+<img src="./demo-images/demo2.png" width="300" height="100">
+
+---------------------------
+
+- When you add a department, you will receive a confirmation that your department has been added to the database.
+
+<img src="./demo-images/demo3.png" width="300" height="50">
+
+---------------------------
+
+- The newly added department will show when you select "View All Departments":
+
+<img src="./demo-images/demo4.png" width="300" height="100">
+
+---------------------------
+
+- Role table is shown when you select "View All Roles":
+
+<img src="./demo-images/demo5.png" width="300" height="150">
+
+---------------------------
+
+- When you add a role, you will receive a confirmation that your role has been added to the database.
+
+<img src="./demo-images/demo6.png" width="300" height="100">
+
+---------------------------
+
+- The newly added role will show when you select "View All Roles":
+
+<img src="./demo-images/demo7.png" width="300" height="150">
+
+---------------------------
+
+- Employee table is shown when you select "View All Employees":
+
+<img src="./demo-images/demo8.png" width="500" height="200">
+
+---------------------------
+
+- When you add an employee, you will receive a confirmation that your employee has been added to the database.
+
+<img src="./demo-images/demo9.png" width="300" height="100">
+
+---------------------------
+
+- The newly added employee will show when you select "View All Employees":
+
+<img src="./demo-images/demo10.png" width="500" height="200">
+
+---------------------------
+
+- When you update an employee role, you will receive a confirmation that your employee role has been updated.
+
+<img src="./demo-images/demo11.png" width="500" height="80">
+
+---------------------------
+
+- The newly updated employee will show when you select "View All Employees":
+
+<img src="./demo-images/demo12.png" width="500" height="200">
+
+- Compared to previous table:
+
+<img src="./demo-images/demo8.png" width="500" height="200">
+
+---------------------------
+
+- When you select "Quit", application will display a thank you message.
+
+<img src="./demo-images/demo13.png" width="300" height="50">
 
 ---------------------------
 
