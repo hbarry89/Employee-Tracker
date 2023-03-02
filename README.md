@@ -24,7 +24,7 @@
 - Demonstration by instructor in office hours
 - Demonstration by TA in class
 - Tutor
-- AskBCS Learning Assistant
+- AskBCS Learning Assistants
 - [MySQL Tutorial for Beginners](https://www.youtube.com/watch?v=7S_tz1z_5bA)
 
 ### Assets :sparkles:
